@@ -1,0 +1,51 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Denzel VPC",
+    "Metadata": {
+
+    },
+    "Parameters": {"DenzelVpc": {
+        "Description": "This is Denzel VPC",
+        "Type": "String",
+        "Default": "172.16.0.0/16"
+    },
+    "denzelaz": {
+        "Description": "Denzel AZ",
+        "Type": "AWS::EC2::AvailabilityZone::Name",
+        "Default": "us-west-1a"
+    },
+    "denzelsubcidr": {
+        "Description": "Denzel subnet Cidr",
+        "Type": "String",
+        "Default": "172.16.1.0/24"
+    }
+
+    },
+    "Mappings": {
+
+    },
+    "Conditions": {
+
+    },
+    "Resources": {"denzelvpc": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": { "Ref": "DenzelVpc" },
+        "Tags": [{ "Key": "Name", "Value":  "vpcdenzel" }]
+      }
+    },
+    "denzelsubnet": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "AvailabilityZone": { "Ref": "denzelaz" },
+        "VpcId": { "Ref": "DenzelVpc" },
+        "CidrBlock": { "Ref": "denzelsubcidr" },
+        "Tags": [{ "Key": "Name", "Value":  "subnetdenzel" }]
+      }
+    }
+
+    },
+    "Outputs": {
+
+    }
+}
